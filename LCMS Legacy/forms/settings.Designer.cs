@@ -64,29 +64,38 @@
             // 
             // profilesButton
             // 
+            profilesButton.BackColor = Color.Silver;
+            profilesButton.FlatAppearance.BorderSize = 0;
+            profilesButton.FlatStyle = FlatStyle.Flat;
             profilesButton.Location = new Point(233, 98);
             profilesButton.Name = "profilesButton";
             profilesButton.Size = new Size(100, 34);
             profilesButton.TabIndex = 5;
             profilesButton.Text = "Открыть";
-            profilesButton.UseVisualStyleBackColor = true;
+            profilesButton.UseVisualStyleBackColor = false;
             profilesButton.Click += profilesButton_Click;
             // 
             // gameButton
             // 
+            gameButton.BackColor = Color.Silver;
+            gameButton.FlatAppearance.BorderSize = 0;
+            gameButton.FlatStyle = FlatStyle.Flat;
             gameButton.Location = new Point(233, 37);
             gameButton.Name = "gameButton";
             gameButton.Size = new Size(100, 34);
             gameButton.TabIndex = 4;
             gameButton.Text = "Открыть";
-            gameButton.UseVisualStyleBackColor = true;
+            gameButton.UseVisualStyleBackColor = false;
             gameButton.Click += gameButton_Click;
             // 
             // profilesPathTextBox
             // 
+            profilesPathTextBox.BackColor = Color.Silver;
+            profilesPathTextBox.BorderStyle = BorderStyle.None;
             profilesPathTextBox.Location = new Point(10, 98);
             profilesPathTextBox.Multiline = true;
             profilesPathTextBox.Name = "profilesPathTextBox";
+            profilesPathTextBox.ReadOnly = true;
             profilesPathTextBox.Size = new Size(217, 34);
             profilesPathTextBox.TabIndex = 3;
             // 
@@ -110,20 +119,26 @@
             // 
             // gamePathTextBox
             // 
+            gamePathTextBox.BackColor = Color.Silver;
+            gamePathTextBox.BorderStyle = BorderStyle.None;
             gamePathTextBox.Location = new Point(10, 37);
             gamePathTextBox.Multiline = true;
             gamePathTextBox.Name = "gamePathTextBox";
+            gamePathTextBox.ReadOnly = true;
             gamePathTextBox.Size = new Size(217, 34);
             gamePathTextBox.TabIndex = 0;
             // 
             // saveSettingsButton
             // 
+            saveSettingsButton.BackColor = Color.Silver;
+            saveSettingsButton.FlatAppearance.BorderSize = 0;
+            saveSettingsButton.FlatStyle = FlatStyle.Flat;
             saveSettingsButton.Location = new Point(255, 151);
             saveSettingsButton.Name = "saveSettingsButton";
             saveSettingsButton.Size = new Size(343, 34);
             saveSettingsButton.TabIndex = 1;
             saveSettingsButton.Text = "Сохранить";
-            saveSettingsButton.UseVisualStyleBackColor = true;
+            saveSettingsButton.UseVisualStyleBackColor = false;
             saveSettingsButton.Click += saveSettingsButton_Click;
             // 
             // groupBox2

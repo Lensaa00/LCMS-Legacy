@@ -53,6 +53,7 @@
             gamePathTextBox.Location = new Point(12, 27);
             gamePathTextBox.Multiline = true;
             gamePathTextBox.Name = "gamePathTextBox";
+            gamePathTextBox.ReadOnly = true;
             gamePathTextBox.Size = new Size(195, 34);
             gamePathTextBox.TabIndex = 1;
             // 
@@ -63,6 +64,7 @@
             profilesPathTextBox.Location = new Point(12, 82);
             profilesPathTextBox.Multiline = true;
             profilesPathTextBox.Name = "profilesPathTextBox";
+            profilesPathTextBox.ReadOnly = true;
             profilesPathTextBox.Size = new Size(195, 34);
             profilesPathTextBox.TabIndex = 3;
             // 
