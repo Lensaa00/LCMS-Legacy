@@ -1,12 +1,10 @@
-﻿using System;
-using System.IO;
-using System.Xml;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 
 public class Config
 {
     public string GamePath { get; set; }
     public string ProfilesFolderPath { get; set; }
+
     // public bool ExampleSetting { get; set; } -- добавление новой настройки так делаем
 
     public Config()
@@ -67,5 +65,14 @@ public class ConfigManager
         }
 
         return config;
+    }
+
+    public bool CheckConfig(string fileName)
+    {
+        if (File.Exists(fileName))
+        {
+            return true;
+        }
+        else { return false; }
     }
 }

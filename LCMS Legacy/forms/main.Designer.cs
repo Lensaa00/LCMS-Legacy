@@ -41,19 +41,19 @@
             profilesBox.BackColor = Color.Silver;
             profilesBox.BorderStyle = BorderStyle.None;
             profilesBox.FormattingEnabled = true;
-            profilesBox.ItemHeight = 20;
-            profilesBox.Location = new Point(14, 36);
-            profilesBox.Margin = new Padding(3, 4, 3, 4);
+            profilesBox.ItemHeight = 15;
+            profilesBox.Location = new Point(12, 27);
             profilesBox.Name = "profilesBox";
-            profilesBox.Size = new Size(173, 260);
+            profilesBox.Size = new Size(151, 195);
             profilesBox.TabIndex = 0;
+            profilesBox.SelectedIndexChanged += profilesBox_SelectedIndexChanged;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(10, 12);
+            label1.Location = new Point(9, 9);
             label1.Name = "label1";
-            label1.Size = new Size(74, 20);
+            label1.Size = new Size(60, 15);
             label1.TabIndex = 1;
             label1.Text = "Профили";
             // 
@@ -62,10 +62,9 @@
             startModded.BackColor = Color.Silver;
             startModded.FlatAppearance.BorderSize = 0;
             startModded.FlatStyle = FlatStyle.Flat;
-            startModded.Location = new Point(193, 36);
-            startModded.Margin = new Padding(3, 4, 3, 4);
+            startModded.Location = new Point(169, 27);
             startModded.Name = "startModded";
-            startModded.Size = new Size(173, 48);
+            startModded.Size = new Size(151, 36);
             startModded.TabIndex = 2;
             startModded.Text = "Запуск [Modded]";
             startModded.UseVisualStyleBackColor = false;
@@ -75,10 +74,9 @@
             startVanilla.BackColor = Color.Silver;
             startVanilla.FlatAppearance.BorderSize = 0;
             startVanilla.FlatStyle = FlatStyle.Flat;
-            startVanilla.Location = new Point(193, 92);
-            startVanilla.Margin = new Padding(3, 4, 3, 4);
+            startVanilla.Location = new Point(169, 69);
             startVanilla.Name = "startVanilla";
-            startVanilla.Size = new Size(173, 48);
+            startVanilla.Size = new Size(151, 36);
             startVanilla.TabIndex = 3;
             startVanilla.Text = "Запуск [Vanilla]";
             startVanilla.UseVisualStyleBackColor = false;
@@ -88,10 +86,9 @@
             settings.BackColor = Color.Silver;
             settings.FlatAppearance.BorderSize = 0;
             settings.FlatStyle = FlatStyle.Flat;
-            settings.Location = new Point(193, 148);
-            settings.Margin = new Padding(3, 4, 3, 4);
+            settings.Location = new Point(169, 111);
             settings.Name = "settings";
-            settings.Size = new Size(173, 48);
+            settings.Size = new Size(151, 36);
             settings.TabIndex = 4;
             settings.Text = "Настройки";
             settings.UseVisualStyleBackColor = false;
@@ -102,27 +99,27 @@
             updateProfiles.BackColor = Color.Silver;
             updateProfiles.FlatAppearance.BorderSize = 0;
             updateProfiles.FlatStyle = FlatStyle.Flat;
-            updateProfiles.Location = new Point(14, 304);
-            updateProfiles.Margin = new Padding(3, 4, 3, 4);
+            updateProfiles.Location = new Point(12, 228);
             updateProfiles.Name = "updateProfiles";
-            updateProfiles.Size = new Size(173, 48);
+            updateProfiles.Size = new Size(151, 36);
             updateProfiles.TabIndex = 5;
             updateProfiles.Text = "Обновить";
             updateProfiles.UseVisualStyleBackColor = false;
+            updateProfiles.Click += updateProfiles_Click;
             // 
             // main
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(376, 369);
+            ClientSize = new Size(329, 277);
             Controls.Add(updateProfiles);
             Controls.Add(settings);
             Controls.Add(startVanilla);
             Controls.Add(startModded);
             Controls.Add(label1);
             Controls.Add(profilesBox);
-            Margin = new Padding(3, 4, 3, 4);
             Name = "main";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "LCMS Legacy";
             Load += main_Load;
             ResumeLayout(false);
