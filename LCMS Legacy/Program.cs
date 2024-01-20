@@ -1,3 +1,5 @@
+using LCMS_Legacy.forms;
+
 namespace LCMS_Legacy
 {
     internal static class Program

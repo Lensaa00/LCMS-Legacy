@@ -46,11 +46,12 @@
             profilesBox.Name = "profilesBox";
             profilesBox.Size = new Size(151, 195);
             profilesBox.TabIndex = 0;
+            profilesBox.SelectedIndexChanged += profilesBox_SelectedIndexChanged;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(12, 9);
+            label1.Location = new Point(9, 9);
             label1.Name = "label1";
             label1.Size = new Size(60, 15);
             label1.TabIndex = 1;
@@ -104,6 +105,7 @@
             updateProfiles.TabIndex = 5;
             updateProfiles.Text = "Обновить";
             updateProfiles.UseVisualStyleBackColor = false;
+            updateProfiles.Click += updateProfiles_Click;
             // 
             // main
             // 
@@ -117,6 +119,7 @@
             Controls.Add(label1);
             Controls.Add(profilesBox);
             Name = "main";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "LCMS Legacy";
             Load += main_Load;
             ResumeLayout(false);

@@ -36,6 +36,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
             Name = "settings";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Настройки";
             ResumeLayout(false);
         }

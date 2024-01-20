@@ -73,6 +73,7 @@
             Controls.Add(label2);
             Controls.Add(label1);
             Name = "notification";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "notification_title";
             ResumeLayout(false);
             PerformLayout();

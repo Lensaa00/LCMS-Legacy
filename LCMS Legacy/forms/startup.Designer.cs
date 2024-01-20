@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             label1 = new Label();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
+            gamePathTextBox = new TextBox();
+            profilesPathTextBox = new TextBox();
             label2 = new Label();
-            button1 = new Button();
-            button2 = new Button();
-            button3 = new Button();
+            gameButton = new Button();
+            profilesButton = new Button();
+            saveChangesButton = new Button();
             SuspendLayout();
             // 
             // label1
@@ -46,25 +46,25 @@
             label1.TabIndex = 0;
             label1.Text = "Путь к игре";
             // 
-            // textBox1
+            // gamePathTextBox
             // 
-            textBox1.BackColor = Color.Silver;
-            textBox1.BorderStyle = BorderStyle.None;
-            textBox1.Location = new Point(12, 27);
-            textBox1.Multiline = true;
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(195, 34);
-            textBox1.TabIndex = 1;
+            gamePathTextBox.BackColor = Color.Silver;
+            gamePathTextBox.BorderStyle = BorderStyle.None;
+            gamePathTextBox.Location = new Point(12, 27);
+            gamePathTextBox.Multiline = true;
+            gamePathTextBox.Name = "gamePathTextBox";
+            gamePathTextBox.Size = new Size(195, 34);
+            gamePathTextBox.TabIndex = 1;
             // 
-            // textBox2
+            // profilesPathTextBox
             // 
-            textBox2.BackColor = Color.Silver;
-            textBox2.BorderStyle = BorderStyle.None;
-            textBox2.Location = new Point(12, 82);
-            textBox2.Multiline = true;
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(195, 34);
-            textBox2.TabIndex = 3;
+            profilesPathTextBox.BackColor = Color.Silver;
+            profilesPathTextBox.BorderStyle = BorderStyle.None;
+            profilesPathTextBox.Location = new Point(12, 82);
+            profilesPathTextBox.Multiline = true;
+            profilesPathTextBox.Name = "profilesPathTextBox";
+            profilesPathTextBox.Size = new Size(195, 34);
+            profilesPathTextBox.TabIndex = 3;
             // 
             // label2
             // 
@@ -75,56 +75,64 @@
             label2.TabIndex = 2;
             label2.Text = "Путь к профилям";
             // 
-            // button1
+            // gameButton
             // 
-            button1.BackColor = Color.Silver;
-            button1.FlatAppearance.BorderSize = 0;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Location = new Point(213, 27);
-            button1.Name = "button1";
-            button1.Size = new Size(103, 34);
-            button1.TabIndex = 4;
-            button1.Text = "Открыть";
-            button1.UseVisualStyleBackColor = false;
+            gameButton.BackColor = Color.Silver;
+            gameButton.FlatAppearance.BorderSize = 0;
+            gameButton.FlatStyle = FlatStyle.Flat;
+            gameButton.Location = new Point(213, 27);
+            gameButton.Name = "gameButton";
+            gameButton.Size = new Size(103, 34);
+            gameButton.TabIndex = 4;
+            gameButton.Text = "Открыть";
+            gameButton.UseVisualStyleBackColor = false;
+            gameButton.Click += gameButton_Click;
             // 
-            // button2
+            // profilesButton
             // 
-            button2.BackColor = Color.Silver;
-            button2.FlatAppearance.BorderSize = 0;
-            button2.FlatStyle = FlatStyle.Flat;
-            button2.Location = new Point(213, 82);
-            button2.Name = "button2";
-            button2.Size = new Size(103, 34);
-            button2.TabIndex = 5;
-            button2.Text = "Открыть";
-            button2.UseVisualStyleBackColor = false;
+            profilesButton.BackColor = Color.Silver;
+            profilesButton.FlatAppearance.BorderSize = 0;
+            profilesButton.FlatStyle = FlatStyle.Flat;
+            profilesButton.Location = new Point(213, 82);
+            profilesButton.Name = "profilesButton";
+            profilesButton.Size = new Size(103, 34);
+            profilesButton.TabIndex = 5;
+            profilesButton.Text = "Открыть";
+            profilesButton.UseVisualStyleBackColor = false;
+            profilesButton.Click += profilesButton_Click;
             // 
-            // button3
+            // saveChangesButton
             // 
-            button3.BackColor = Color.Silver;
-            button3.FlatAppearance.BorderSize = 0;
-            button3.FlatStyle = FlatStyle.Flat;
-            button3.Location = new Point(12, 122);
-            button3.Name = "button3";
-            button3.Size = new Size(304, 34);
-            button3.TabIndex = 6;
-            button3.Text = "Сохранить";
-            button3.UseVisualStyleBackColor = false;
+            saveChangesButton.BackColor = Color.Silver;
+            saveChangesButton.FlatAppearance.BorderSize = 0;
+            saveChangesButton.FlatStyle = FlatStyle.Flat;
+            saveChangesButton.Location = new Point(12, 122);
+            saveChangesButton.Name = "saveChangesButton";
+            saveChangesButton.Size = new Size(304, 34);
+            saveChangesButton.TabIndex = 6;
+            saveChangesButton.Text = "Сохранить";
+            saveChangesButton.UseVisualStyleBackColor = false;
+            saveChangesButton.Click += button3_Click;
             // 
             // startup
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(330, 171);
-            Controls.Add(button3);
-            Controls.Add(button2);
-            Controls.Add(button1);
-            Controls.Add(textBox2);
+            Controls.Add(saveChangesButton);
+            Controls.Add(profilesButton);
+            Controls.Add(gameButton);
+            Controls.Add(profilesPathTextBox);
             Controls.Add(label2);
-            Controls.Add(textBox1);
+            Controls.Add(gamePathTextBox);
             Controls.Add(label1);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "startup";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Первоначальная настройка";
+            FormClosing += startup_FormClosing;
+            FormClosed += startup_FormClosed;
+            Load += startup_Load;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -132,11 +140,11 @@
         #endregion
 
         private Label label1;
-        private TextBox textBox1;
-        private TextBox textBox2;
+        private TextBox gamePathTextBox;
+        private TextBox profilesPathTextBox;
         private Label label2;
-        private Button button1;
-        private Button button2;
-        private Button button3;
+        private Button gameButton;
+        private Button profilesButton;
+        private Button saveChangesButton;
     }
 }
