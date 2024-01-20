@@ -37,8 +37,7 @@
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK) // если мы подтвердили выбор в окне, то...
                 {
-                    string fileName = openFileDialog.FileName; // получаем название файла (содержит директорию).
-                    gamePath = Path.GetDirectoryName(fileName); // сохраняем директорию в переменную
+                    gamePath = openFileDialog.FileName; // сохраняем путь к игре в локальную переменную
                 }
             }
         }

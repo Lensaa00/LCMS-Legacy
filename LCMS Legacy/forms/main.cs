@@ -39,6 +39,11 @@ namespace LCMS_Legacy
 
         public void StartGame(string method)
         {
+            Config config = configManager.LoadConfig(); // Загружаем конфигурацию
+
+            gamePath = config.GamePath; // загружаем директорию игры из конфига
+            profilesPath = config.ProfilesFolderPath; // загружаем директорию профилей из конфига
+
             if (method == "modded") // если метод запуска - modded
             {
                 if (selectedProfile != "") // если выбран профиль
@@ -72,7 +77,7 @@ namespace LCMS_Legacy
             }
             else
             {
-                Console.WriteLine("Выран неверный метод"); // выводим ошибку
+                Console.WriteLine("Выбран неверный метод"); // выводим ошибку
             }
         }
 
@@ -114,6 +119,16 @@ namespace LCMS_Legacy
             {
                 Console.WriteLine(ex.Message); // выводим ошибку в консоль
             }
+        }
+
+        private void startModded_Click(object sender, EventArgs e)
+        {
+            StartGame("modded");
+        }
+
+        private void startVanilla_Click(object sender, EventArgs e)
+        {
+            StartGame("vanilla");
         }
     }
 }
