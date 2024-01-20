@@ -68,6 +68,7 @@
             startModded.TabIndex = 2;
             startModded.Text = "Запуск [Modded]";
             startModded.UseVisualStyleBackColor = false;
+            startModded.Click += startModded_Click;
             // 
             // startVanilla
             // 
@@ -80,6 +81,7 @@
             startVanilla.TabIndex = 3;
             startVanilla.Text = "Запуск [Vanilla]";
             startVanilla.UseVisualStyleBackColor = false;
+            startVanilla.Click += startVanilla_Click;
             // 
             // settings
             // 
