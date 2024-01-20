@@ -4,6 +4,7 @@ public class Config
 {
     public string GamePath { get; set; }
     public string ProfilesFolderPath { get; set; }
+    public bool CloseOnGameStart {  get; set; }
 
     // public bool ExampleSetting { get; set; } -- добавление новой настройки так делаем
 
@@ -74,5 +75,20 @@ public class ConfigManager
             return true;
         }
         else { return false; }
+    }
+
+    public void SetDefaults(string filePath)
+    {
+        ConfigManager configManager = new ConfigManager(filePath);
+
+        Config config = configManager.LoadConfig(); // открываем (загружаем) конфиг
+
+        config.GamePath = ""; // сохраняем путь к игре
+        config.ProfilesFolderPath = ""; // сохраняем путь к папке с профилями
+        config.CloseOnGameStart = false; // 
+
+        // config.ExampleSetting = "testValue"; // тестовая настройка, нужно добавить ее в classes/ConfigManager.cs по примеру
+
+        configManager.SaveConfig(config); // сохраняем конфиг
     }
 }

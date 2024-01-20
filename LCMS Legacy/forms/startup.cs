@@ -17,14 +17,7 @@
         {
             if (!configManager.CheckConfig("config.xml")) // если конфига нет, то...
             {
-                Config config = configManager.LoadConfig(); // открываем (загружаем) конфиг
-
-                config.GamePath = ""; // сохраняем путь к игре
-                config.ProfilesFolderPath = ""; // сохраняем путь к папке с профилями
-
-                // config.ExampleSetting = "testValue"; // тестовая настройка, нужно добавить ее в classes/ConfigManager.cs по примеру
-
-                configManager.SaveConfig(config); // сохраняем конфиг
+                configManager.SetDefaults("config.xml");
             }
         }
 
@@ -40,6 +33,8 @@
                     gamePath = openFileDialog.FileName; // сохраняем путь к игре в локальную переменную
                 }
             }
+
+            gamePathTextBox.Text = gamePath;
         }
 
         private void profilesButton_Click(object sender, EventArgs e)
@@ -53,6 +48,8 @@
             {
                 profilesPath = folderBrowserDialog.SelectedPath; // присваеваем локальной переменной профилей значение выбранной папки
             }
+
+            profilesPathTextBox.Text = profilesPath;
         }
 
         private void button3_Click(object sender, EventArgs e)
