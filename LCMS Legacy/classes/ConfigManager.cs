@@ -7,6 +7,8 @@ public class Config
 {
     public string GamePath { get; set; }
     public string ProfilesFolderPath { get; set; }
+    // public bool ExampleSetting { get; set; } -- добавление новой настройки так делаем
+
     public Config()
     {
     }

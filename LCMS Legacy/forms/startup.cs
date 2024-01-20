@@ -1,15 +1,4 @@
-﻿using LCMS_Legacy.classes;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace LCMS_Legacy.forms
+﻿namespace LCMS_Legacy.forms
 {
     public partial class startup : Form
     {
@@ -20,20 +9,15 @@ namespace LCMS_Legacy.forms
 
         private void startup_Load(object sender, EventArgs e)
         {
-            // Создаем экземпляр ConfigSaver
-            ConfigManager configSaver = new ConfigManager("config.xml");
+            ConfigManager configSaver = new ConfigManager("config.xml"); //создаем локальный объект конфига
+            Config config = configSaver.LoadConfig(); // открываем (загружаем) конфиг
 
-            // Загружаем конфигурацию
-            Config config = configSaver.LoadConfig();
-
-            // Делаем изменения в конфигурации
-            config.GamePath = "новый_путь_к_игре";
-            config.ProfilesFolderPath = "новый_путь_к_папке_с_профилями";
-            // Добавляем другие изменения
-
-            // Сохраняем измененную конфигурацию
+            config.GamePath = ""; // сохраняем путь к игре
+            config.ProfilesFolderPath = ""; // сохраняем путь к папке с профилями
+            
+            // config.ExampleSetting = "testValue"; -- тестовая настройка, нужно добавить ее в classes/ConfigManager.cs
+            
             configSaver.SaveConfig(config);
-
         }
     }
 }
