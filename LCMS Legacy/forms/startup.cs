@@ -7,7 +7,6 @@
         public string gamePath = ""; // задаем стандартное значение для gamePath
         public string profilesPath = ""; // задаем стандартное значение для profilesPath
 
-
         public startup()
         {
             InitializeComponent();

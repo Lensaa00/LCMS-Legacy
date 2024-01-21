@@ -2,6 +2,7 @@
 
 public class Config
 {
+
     public string GamePath { get; set; }
     public string ProfilesFolderPath { get; set; }
     public bool CloseOnGameStart {  get; set; }
