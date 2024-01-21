@@ -38,7 +38,7 @@
             // 
             // profilesBox
             // 
-            profilesBox.BackColor = Color.Silver;
+            profilesBox.BackColor = SystemColors.ActiveCaption;
             profilesBox.BorderStyle = BorderStyle.None;
             profilesBox.FormattingEnabled = true;
             profilesBox.ItemHeight = 15;
@@ -59,7 +59,7 @@
             // 
             // startModded
             // 
-            startModded.BackColor = Color.Silver;
+            startModded.BackColor = SystemColors.ActiveCaption;
             startModded.FlatAppearance.BorderSize = 0;
             startModded.FlatStyle = FlatStyle.Flat;
             startModded.Location = new Point(169, 27);
@@ -72,7 +72,7 @@
             // 
             // startVanilla
             // 
-            startVanilla.BackColor = Color.Silver;
+            startVanilla.BackColor = SystemColors.ActiveCaption;
             startVanilla.FlatAppearance.BorderSize = 0;
             startVanilla.FlatStyle = FlatStyle.Flat;
             startVanilla.Location = new Point(169, 69);
@@ -85,7 +85,7 @@
             // 
             // settings
             // 
-            settings.BackColor = Color.Silver;
+            settings.BackColor = SystemColors.ActiveCaption;
             settings.FlatAppearance.BorderSize = 0;
             settings.FlatStyle = FlatStyle.Flat;
             settings.Location = new Point(169, 111);
@@ -98,7 +98,7 @@
             // 
             // updateProfiles
             // 
-            updateProfiles.BackColor = Color.Silver;
+            updateProfiles.BackColor = SystemColors.ActiveCaption;
             updateProfiles.FlatAppearance.BorderSize = 0;
             updateProfiles.FlatStyle = FlatStyle.Flat;
             updateProfiles.Location = new Point(12, 228);
@@ -113,6 +113,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.Control;
             ClientSize = new Size(329, 277);
             Controls.Add(updateProfiles);
             Controls.Add(settings);

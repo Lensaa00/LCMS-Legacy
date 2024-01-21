@@ -9,6 +9,8 @@ namespace LCMS_Legacy
 
         public string gamePath = ""; // задаем начальное значение для gamePath
         public string profilesPath = ""; // задаем начальное значение для profilesPath
+        public bool closeOnGameStart = false; // задаем стандартное значение для profilesPath
+
         public string selectedProfile = ""; // задаем начальное значение для selectedProfile
 
         public main()
@@ -16,7 +18,16 @@ namespace LCMS_Legacy
             InitializeComponent();
         }
 
-        public void loadProfiles(string folderPath)
+        public void LoadConfig()
+        {
+            Config config = configManager.LoadConfig(); // Загружаем конфигурацию
+
+            gamePath = config.GamePath; // загружаем директорию игры из конфига
+            profilesPath = config.ProfilesFolderPath; // загружаем директорию профилей из конфига
+            closeOnGameStart = config.CloseOnGameStart; // загружаем состояние флага закрытия после запуска игры
+        }
+
+        public void LoadProfiles(string folderPath)
         {
             profilesBox.Items.Clear(); // чистим все предыдущие значения
 
@@ -79,6 +90,11 @@ namespace LCMS_Legacy
             {
                 Console.WriteLine("Выбран неверный метод"); // выводим ошибку
             }
+
+            if (closeOnGameStart == true)
+            {
+                Application.Exit(); // закрытие приложения (полный выход)
+            }
         }
 
         private void main_Load(object sender, EventArgs e)
@@ -90,23 +106,25 @@ namespace LCMS_Legacy
             }
 
             // после закрытия начальной настройки
-            Config config = configManager.LoadConfig(); // Загружаем конфигурацию
 
-            gamePath = config.GamePath; // загружаем директорию игры из конфига
-            profilesPath = config.ProfilesFolderPath; // загружаем директорию профилей из конфига
-
-            loadProfiles(profilesPath); // обновляем список профилей в profilesBox'е
+            LoadConfig(); // загружаем записанную конфигурацию
+            LoadProfiles(profilesPath); // обновляем список профилей в profilesBox'е
         }
 
         private void settings_Click(object sender, EventArgs e)
         {
             settings form = new settings(); // создаем объект формы с настройками
             form.ShowDialog(); // показываем форму
+            if (form.DialogResult == DialogResult.OK) // после нажатия на кнопку сохранить
+            {
+                LoadConfig(); // обновляем локальный конфиг
+                LoadProfiles(profilesPath); // обновляем профили
+            }
         }
 
         private void updateProfiles_Click(object sender, EventArgs e)
         {
-            loadProfiles(profilesPath); // по кнопке вызываем функцию обновления профилей
+            LoadProfiles(profilesPath); // по кнопке вызываем функцию обновления профилей
         }
 
         private void profilesBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -123,12 +141,12 @@ namespace LCMS_Legacy
 
         private void startModded_Click(object sender, EventArgs e)
         {
-            StartGame("modded");
+            StartGame("modded"); // запуск модифицированной версии
         }
 
         private void startVanilla_Click(object sender, EventArgs e)
         {
-            StartGame("vanilla");
+            StartGame("vanilla"); // запуск ванильной версии
         }
     }
 }

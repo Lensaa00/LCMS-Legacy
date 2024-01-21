@@ -48,7 +48,7 @@
             // 
             // gamePathTextBox
             // 
-            gamePathTextBox.BackColor = Color.Silver;
+            gamePathTextBox.BackColor = SystemColors.ActiveCaption;
             gamePathTextBox.BorderStyle = BorderStyle.None;
             gamePathTextBox.Location = new Point(12, 27);
             gamePathTextBox.Multiline = true;
@@ -59,7 +59,7 @@
             // 
             // profilesPathTextBox
             // 
-            profilesPathTextBox.BackColor = Color.Silver;
+            profilesPathTextBox.BackColor = SystemColors.ActiveCaption;
             profilesPathTextBox.BorderStyle = BorderStyle.None;
             profilesPathTextBox.Location = new Point(12, 82);
             profilesPathTextBox.Multiline = true;
@@ -79,7 +79,7 @@
             // 
             // gameButton
             // 
-            gameButton.BackColor = Color.Silver;
+            gameButton.BackColor = SystemColors.ActiveCaption;
             gameButton.FlatAppearance.BorderSize = 0;
             gameButton.FlatStyle = FlatStyle.Flat;
             gameButton.Location = new Point(213, 27);
@@ -92,7 +92,7 @@
             // 
             // profilesButton
             // 
-            profilesButton.BackColor = Color.Silver;
+            profilesButton.BackColor = SystemColors.ActiveCaption;
             profilesButton.FlatAppearance.BorderSize = 0;
             profilesButton.FlatStyle = FlatStyle.Flat;
             profilesButton.Location = new Point(213, 82);
@@ -105,7 +105,7 @@
             // 
             // saveChangesButton
             // 
-            saveChangesButton.BackColor = Color.Silver;
+            saveChangesButton.BackColor = SystemColors.ActiveCaption;
             saveChangesButton.FlatAppearance.BorderSize = 0;
             saveChangesButton.FlatStyle = FlatStyle.Flat;
             saveChangesButton.Location = new Point(12, 122);

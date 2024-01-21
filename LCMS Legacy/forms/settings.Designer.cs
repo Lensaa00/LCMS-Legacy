@@ -64,7 +64,7 @@
             // 
             // profilesButton
             // 
-            profilesButton.BackColor = Color.Silver;
+            profilesButton.BackColor = SystemColors.ActiveCaption;
             profilesButton.FlatAppearance.BorderSize = 0;
             profilesButton.FlatStyle = FlatStyle.Flat;
             profilesButton.Location = new Point(233, 98);
@@ -77,7 +77,7 @@
             // 
             // gameButton
             // 
-            gameButton.BackColor = Color.Silver;
+            gameButton.BackColor = SystemColors.ActiveCaption;
             gameButton.FlatAppearance.BorderSize = 0;
             gameButton.FlatStyle = FlatStyle.Flat;
             gameButton.Location = new Point(233, 37);
@@ -90,8 +90,9 @@
             // 
             // profilesPathTextBox
             // 
-            profilesPathTextBox.BackColor = Color.Silver;
+            profilesPathTextBox.BackColor = SystemColors.ActiveCaption;
             profilesPathTextBox.BorderStyle = BorderStyle.None;
+            profilesPathTextBox.Enabled = false;
             profilesPathTextBox.Location = new Point(10, 98);
             profilesPathTextBox.Multiline = true;
             profilesPathTextBox.Name = "profilesPathTextBox";
@@ -119,8 +120,9 @@
             // 
             // gamePathTextBox
             // 
-            gamePathTextBox.BackColor = Color.Silver;
+            gamePathTextBox.BackColor = SystemColors.ActiveCaption;
             gamePathTextBox.BorderStyle = BorderStyle.None;
+            gamePathTextBox.Enabled = false;
             gamePathTextBox.Location = new Point(10, 37);
             gamePathTextBox.Multiline = true;
             gamePathTextBox.Name = "gamePathTextBox";
@@ -130,7 +132,8 @@
             // 
             // saveSettingsButton
             // 
-            saveSettingsButton.BackColor = Color.Silver;
+            saveSettingsButton.BackColor = SystemColors.ActiveCaption;
+            saveSettingsButton.DialogResult = DialogResult.OK;
             saveSettingsButton.FlatAppearance.BorderSize = 0;
             saveSettingsButton.FlatStyle = FlatStyle.Flat;
             saveSettingsButton.Location = new Point(255, 151);

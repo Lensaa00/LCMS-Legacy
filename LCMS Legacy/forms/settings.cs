@@ -15,27 +15,26 @@
 
         private void settings_Load(object sender, EventArgs e)
         {
-            if (File.Exists("config.xml"))
+            if (File.Exists("config.xml")) // если есть конфиг, то...
             {
-                Config config = configManager.LoadConfig();
+                Config config = configManager.LoadConfig(); // заружаем конфиг
 
-                gamePath = config.GamePath;
-                profilesPath = config.ProfilesFolderPath;
-                closeOnGameStart2 = config.CloseOnGameStart;
+                gamePath = config.GamePath;                     //
+                profilesPath = config.ProfilesFolderPath;       //  присваиваем локальным переменным значения из конфига
+                closeOnGameStart2 = config.CloseOnGameStart;    // 
             }
             else
             {
-                configManager.SetDefaults("config.xml");
+                configManager.SetDefaults("config.xml"); // устанавливаем стандартные значения
             }
 
-            closeOnGameStart.Checked = closeOnGameStart2;
-            gamePathTextBox.Text = gamePath;
-            profilesPathTextBox.Text = profilesPath;
+            closeOnGameStart.Checked = closeOnGameStart2; // устанавливаем значение флага для checkbox'a
+            gamePathTextBox.Text = gamePath; // устанавливаем путь к игре в текстовое поле
+            profilesPathTextBox.Text = profilesPath; // устанавливаем путь к профилям в текс. поле
         }
 
         private void saveSettingsButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("WORK");
             Config config = configManager.LoadConfig(); // открываем (загружаем) конфиг
 
             config.GamePath = gamePathTextBox.Text; // сохраняем путь к игре
@@ -45,6 +44,8 @@
             // config.ExampleSetting = "testValue"; // тестовая настройка, нужно добавить ее в classes/ConfigManager.cs по примеру
 
             configManager.SaveConfig(config); // сохраняем конфиг
+
+            MessageBox.Show("Конфигурация сохранена"); // выводим сообщение
         }
 
         private void gameButton_Click(object sender, EventArgs e)
@@ -60,7 +61,7 @@
                 }
             }
 
-            gamePathTextBox.Text = gamePath;
+            gamePathTextBox.Text = gamePath; // устанавливаем новое значение пути к игре в текстовое поле
         }
 
         private void profilesButton_Click(object sender, EventArgs e)
@@ -75,7 +76,7 @@
                 profilesPath = folderBrowserDialog.SelectedPath; // присваеваем локальной переменной профилей значение выбранной папки
             }
 
-            profilesPathTextBox.Text = profilesPath;
+            profilesPathTextBox.Text = profilesPath; // устанавливаем новое значение пути к профилям в текстовое поле
         }
     }
 }
