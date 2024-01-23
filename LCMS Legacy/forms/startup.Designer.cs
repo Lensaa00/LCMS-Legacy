@@ -129,6 +129,7 @@
             Controls.Add(gamePathTextBox);
             Controls.Add(label1);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            MinimizeBox = false;
             Name = "startup";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Первоначальная настройка";

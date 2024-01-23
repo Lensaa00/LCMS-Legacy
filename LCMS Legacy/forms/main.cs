@@ -1,11 +1,16 @@
-﻿using LCMS_Legacy.forms;
+﻿using LCMS_Legacy.classes;
+using LCMS_Legacy.forms;
 using System.Diagnostics;
 
 namespace LCMS_Legacy
 {
+
     public partial class main : Form
     {
+        
+
         ConfigManager configManager = new ConfigManager("config.xml"); //создаем локальный объект конфига
+        Updater updateManager = new Updater();
 
         public string gamePath = ""; // задаем начальное значение для gamePath
         public string profilesPath = ""; // задаем начальное значение для profilesPath
@@ -16,6 +21,22 @@ namespace LCMS_Legacy
         public main()
         {
             InitializeComponent();
+            CheckAndPerformUpdate();
+        }
+
+        private async void CheckAndPerformUpdate()
+        {
+            if (await updateManager.CheckForUpdates())
+            {
+                if (await updateManager.PerformUpdate())
+                {
+                    MessageBox.Show("Update Done!");
+                }
+                else
+                {
+                    MessageBox.Show("Updating error!");
+                }
+            }
         }
 
         public void LoadConfig()

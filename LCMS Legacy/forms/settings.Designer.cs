@@ -214,6 +214,8 @@
             Controls.Add(groupBox3);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
             Name = "settings";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Настройки";

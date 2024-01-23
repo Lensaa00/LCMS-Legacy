@@ -121,6 +121,8 @@
             Controls.Add(startModded);
             Controls.Add(label1);
             Controls.Add(profilesBox);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
             Name = "main";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "LCMS Legacy";

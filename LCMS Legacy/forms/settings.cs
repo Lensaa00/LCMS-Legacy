@@ -69,7 +69,14 @@
             string RoamingPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData); // получаем путь к папке Roaming
 
             FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog(); // открываем новое диалоговое окно с выбором директории
-            folderBrowserDialog.SelectedPath = RoamingPath; // при старте открываем папку Roaming
+            if (profilesPathTextBox.Text != "")
+            {
+                folderBrowserDialog.SelectedPath = profilesPathTextBox.Text; // при старте открываем папку Roaming
+            }
+            else
+            {
+                folderBrowserDialog.SelectedPath = RoamingPath; // при старте открываем папку Roaming
+            }
             folderBrowserDialog.Description = "Выберите папку для сохранения файла"; // Задаем описание окна
             if (folderBrowserDialog.ShowDialog() == DialogResult.OK && !string.IsNullOrEmpty(folderBrowserDialog.SelectedPath)) // если выбрали директорию и она не ровна null
             {
