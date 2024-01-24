@@ -21,16 +21,16 @@ namespace LCMS_Legacy
         public main()
         {
             InitializeComponent();
-            CheckAndPerformUpdate();
         }
 
         private async void CheckAndPerformUpdate()
         {
             if (await updateManager.CheckForUpdates())
             {
+
                 if (await updateManager.PerformUpdate())
                 {
-                    MessageBox.Show("Update Done!");
+                    MessageBox.Show("Updating Done!");
                 }
                 else
                 {
@@ -130,6 +130,8 @@ namespace LCMS_Legacy
 
             LoadConfig(); // загружаем записанную конфигурацию
             LoadProfiles(profilesPath); // обновляем список профилей в profilesBox'е
+
+            //CheckAndPerformUpdate();
         }
 
         private void settings_Click(object sender, EventArgs e)

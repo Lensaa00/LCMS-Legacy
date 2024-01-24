@@ -9,18 +9,18 @@ namespace LCMS_Legacy.classes
     {
         private const string owner = "Lensaa00";
         private const string repo = "LCMS-Legacy";
-        private const string releaseTagName = "latest";
+        private const string releaseTagName = "1.0.2";
 
         public async Task<bool> CheckForUpdates()
         {
             try
             {
-                var client = new GitHubClient(new ProductHeaderValue("LCMS"));
+                var client = new GitHubClient(new ProductHeaderValue("LCMS-Legacy"));
                 var releases = await client.Repository.Release.GetAll(owner, repo);
 
                 var latestRelease = releases[0]; // Первый элемент - последний релиз
 
-                var currentVersion = Assembly.GetEntryAssembly().GetName().Version;
+                var currentVersion = new Version("1.0.0");
                 var latestVersion = new Version(latestRelease.TagName);
 
                 return latestVersion > currentVersion;
@@ -28,6 +28,7 @@ namespace LCMS_Legacy.classes
             catch (Exception ex)
             {
                 Console.WriteLine($"Ошибка проверки обновлений: {ex.Message}");
+                MessageBox.Show(ex.Message);
                 return false;
             }
         }
@@ -41,7 +42,7 @@ namespace LCMS_Legacy.classes
 
                 var assetUrl = releases.Split('"')[5]; // Получаем URL ассета с исполняемым файлом
 
-                var downloadPath = Path.Combine(Path.GetTempPath(), "LCMS Update.zip");
+                var downloadPath = Path.Combine(Path.GetTempPath(), "Update.zip");
 
                 await client.DownloadFileTaskAsync(assetUrl, downloadPath);
 
@@ -60,6 +61,7 @@ namespace LCMS_Legacy.classes
             catch (Exception ex)
             {
                 Console.WriteLine($"Ошибка обновления: {ex.Message}");
+                MessageBox.Show(ex.Message);
                 return false;
             }
         }
