@@ -48,6 +48,7 @@
             panel3 = new Panel();
             label8 = new Label();
             panel4 = new Panel();
+            appUpdateCheck = new Button();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
@@ -302,6 +303,7 @@
             // panel4
             // 
             panel4.BackColor = Color.FromArgb(71, 71, 110);
+            panel4.Controls.Add(appUpdateCheck);
             panel4.Controls.Add(label3);
             panel4.Controls.Add(saveSettingsButton);
             panel4.Controls.Add(label4);
@@ -310,6 +312,21 @@
             panel4.Name = "panel4";
             panel4.Size = new Size(599, 193);
             panel4.TabIndex = 9;
+            // 
+            // appUpdateCheck
+            // 
+            appUpdateCheck.BackColor = Color.FromArgb(129, 129, 212);
+            appUpdateCheck.FlatAppearance.BorderSize = 0;
+            appUpdateCheck.FlatStyle = FlatStyle.Flat;
+            appUpdateCheck.Font = new Font("Arial Black", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            appUpdateCheck.ForeColor = Color.White;
+            appUpdateCheck.Location = new Point(248, 110);
+            appUpdateCheck.Name = "appUpdateCheck";
+            appUpdateCheck.Size = new Size(343, 34);
+            appUpdateCheck.TabIndex = 3;
+            appUpdateCheck.Text = "Проверить обновления";
+            appUpdateCheck.UseVisualStyleBackColor = false;
+            appUpdateCheck.Click += appUpdateCheck_Click;
             // 
             // settings
             // 
@@ -362,5 +379,6 @@
         private Panel panel3;
         private Label label8;
         private Panel panel4;
+        private Button appUpdateCheck;
     }
 }

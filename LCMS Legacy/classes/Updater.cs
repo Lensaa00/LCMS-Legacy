@@ -9,7 +9,7 @@ public class Updater
     string gitOwner = "Lensaa00";
     string gitName = "LCMS-Legacy";
 
-    public async void CheckForUpdates()
+    public async void CheckForUpdates(bool showUpdateInfo)
     {
         var client = new GitHubClient(new ProductHeaderValue("LCMSLegacy"));
 
@@ -28,7 +28,10 @@ public class Updater
         }
         else
         {
-            MessageBox.Show("Обновления не найдены");
+            if (showUpdateInfo)
+            {
+                MessageBox.Show("Обновления LCMS не обаружены!\nВаша версия актуальна.", "Обновления не найдены", MessageBoxButtons.OK);
+            }
         }
     }
 

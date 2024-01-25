@@ -118,17 +118,20 @@ namespace LCMS_Legacy
 
             LoadConfig(); // загружаем записанную конфигурацию
             LoadProfiles(profilesPath); // обновляем список профилей в profilesBox'е
-            updater.CheckForUpdates();
+            updater.CheckForUpdates(false);
         }
 
         private void settings_Click(object sender, EventArgs e)
         {
-            settings form = new settings(); // создаем объект формы с настройками
-            form.ShowDialog(); // показываем форму
-            if (form.DialogResult == DialogResult.OK) // после нажатия на кнопку сохранить
+            if (!Application.OpenForms.OfType<settings>().Any())
             {
-                LoadConfig(); // обновляем локальный конфиг
-                LoadProfiles(profilesPath); // обновляем профили
+                settings form = new settings(); // создаем объект формы с настройками
+                form.Show(); // показываем форму
+                if (form.DialogResult == DialogResult.OK) // после нажатия на кнопку сохранить
+                {
+                    LoadConfig(); // обновляем локальный конфиг
+                    LoadProfiles(profilesPath); // обновляем профили
+                }
             }
         }
 

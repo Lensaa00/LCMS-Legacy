@@ -8,6 +8,7 @@ namespace LCMS_Legacy.forms
         private bool isMouseDown = false;
 
         ConfigManager configManager = new ConfigManager("config.xml");
+        Updater updater = new Updater();
 
         public string gamePath = ""; // задаем стандартное значение для gamePath
         public string profilesPath = ""; // задаем стандартное значение для profilesPath
@@ -131,6 +132,11 @@ namespace LCMS_Legacy.forms
         private void minimizeApp_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void appUpdateCheck_Click(object sender, EventArgs e)
+        {
+            updater.CheckForUpdates(true);
         }
     }
 }
