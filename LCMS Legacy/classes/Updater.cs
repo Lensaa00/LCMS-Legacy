@@ -1,69 +1,61 @@
-﻿using Octokit;
-using System.Diagnostics;
+﻿using Microsoft.VisualBasic;
+using Octokit;
 using System.Net;
 using System.Reflection;
+using System.Diagnostics;
 
-namespace LCMS_Legacy.classes
+public class Updater
 {
-    internal class Updater
+    string gitOwner = "Lensaa00";
+    string gitName = "LCMS-Legacy";
+
+    public async void CheckForUpdates()
     {
-        private const string owner = "Lensaa00";
-        private const string repo = "LCMS-Legacy";
-        private const string releaseTagName = "1.0.2";
+        var client = new GitHubClient(new ProductHeaderValue("LCMSLegacy"));
 
-        public async Task<bool> CheckForUpdates()
+        var releases = client.Repository.Release.GetAll(gitOwner, gitName);
+        var latest = (await releases)[0];
+
+        Version currentVersion = Assembly.GetEntryAssembly().GetName().Version;
+        Version latestVersion = new Version(latest.TagName);
+
+        if (latestVersion > currentVersion)
         {
-            try
+            if (MessageBox.Show($"LCMS Legacy\nТекущая версия: {currentVersion.ToString(3)}\nВерсия обновления: {latestVersion}\nОбновить?", "Доступно обновление!", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                var client = new GitHubClient(new ProductHeaderValue("LCMS-Legacy"));
-                var releases = await client.Repository.Release.GetAll(owner, repo);
-
-                var latestRelease = releases[0]; // Первый элемент - последний релиз
-
-                var currentVersion = new Version("1.0.0");
-                var latestVersion = new Version(latestRelease.TagName);
-
-                return latestVersion > currentVersion;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Ошибка проверки обновлений: {ex.Message}");
-                MessageBox.Show(ex.Message);
-                return false;
+                UpdateApp();
             }
         }
-
-        public async Task<bool> PerformUpdate()
+        else
         {
-            try
-            {
-                var client = new WebClient();
-                var releases = await client.DownloadStringTaskAsync($"https://github.com/{owner}/{repo}/releases/tag/{releaseTagName}");
-
-                var assetUrl = releases.Split('"')[5]; // Получаем URL ассета с исполняемым файлом
-
-                var downloadPath = Path.Combine(Path.GetTempPath(), "Update.zip");
-
-                await client.DownloadFileTaskAsync(assetUrl, downloadPath);
-
-                // Распаковка архива и обновление файлов
-
-                // Перезапуск приложения после обновления
-                Process.Start(new ProcessStartInfo
-                {
-                    FileName = "LCMS Legacy.exe",
-                    UseShellExecute = true
-                });
-
-                Environment.Exit(0); // Завершение текущего экземпляра приложения
-                return true;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Ошибка обновления: {ex.Message}");
-                MessageBox.Show(ex.Message);
-                return false;
-            }
+            MessageBox.Show("Обновления не найдены");
         }
+    }
+
+    public async void UpdateApp()
+    {
+        var gitClient = new GitHubClient(new ProductHeaderValue("LCMSLegacy"));
+
+        var releases = gitClient.Repository.Release.GetAll(gitOwner, gitName);
+        var latest = (await releases)[0];
+        var assets = latest.Assets;
+        var downloadAsset = assets[0];
+
+        string exename = AppDomain.CurrentDomain.FriendlyName;
+
+        Version latestVersion = new Version(latest.TagName);
+
+        Directory.SetCurrentDirectory(AppContext.BaseDirectory);
+
+        using (var wc = new WebClient())
+        {
+            wc.DownloadFile($"https://github.com/Lensaa00/LCMS-Legacy/releases/download/{latestVersion}/LCMS.Legacy.rar", "Update.rar");
+            Cmd($"taskkill /f /im \"LCMS Legacy.exe\" && timeout /t 1 && tar -xf Update.rar && del Update.rar && \"LCMS Legacy.exe\"");
+        }
+    }
+
+    public void Cmd (string line)
+    {
+        Process.Start("cmd.exe", "/c " + line);
     }
 }
