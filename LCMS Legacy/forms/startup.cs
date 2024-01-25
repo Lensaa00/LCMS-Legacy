@@ -2,6 +2,9 @@
 {
     public partial class startup : Form
     {
+        private Point mouseOffset;
+        private bool isMouseDown = false;
+
         ConfigManager configManager = new ConfigManager("config.xml"); //создаем локальный объект конфига
 
         public string gamePath = ""; // задаем стандартное значение для gamePath
@@ -79,6 +82,47 @@
         private void startup_FormClosing(object sender, FormClosingEventArgs e)
         {
             //
+        }
+
+        private void closeApp_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void minimizeApp_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void panel1_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                // Сохраняем текущую позицию мыши при нажатии
+                mouseOffset = new Point(-e.X, -e.Y);
+                isMouseDown = true;
+            }
+        }
+
+        private void panel1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (isMouseDown)
+            {
+                // Получаем новую позицию окна относительно начальной точки
+                Point mousePos = Control.MousePosition;
+                mousePos.Offset(mouseOffset.X, mouseOffset.Y);
+
+                // Перемещаем окно на новую позицию
+                Location = mousePos;
+            }
+        }
+
+        private void panel1_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                isMouseDown = false;
+            }
         }
     }
 }

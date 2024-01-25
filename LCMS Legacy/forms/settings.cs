@@ -2,6 +2,9 @@
 {
     public partial class settings : Form
     {
+        private Point mouseOffset;
+        private bool isMouseDown = false;
+
         ConfigManager configManager = new ConfigManager("config.xml");
 
         public string gamePath = ""; // задаем стандартное значение для gamePath
@@ -67,23 +70,63 @@
         private void profilesButton_Click(object sender, EventArgs e)
         {
             string RoamingPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData); // получаем путь к папке Roaming
+            string path = RoamingPath;
+
+            if (Directory.Exists($"{RoamingPath}/Thunderstore Mod Manager/DataFolder/LethalCompany/profiles"))
+            {
+                path = $"{RoamingPath}/Thunderstore Mod Manager/DataFolder/LethalCompany/profiles";
+            }
 
             FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog(); // открываем новое диалоговое окно с выбором директории
-            if (profilesPathTextBox.Text != "")
-            {
-                folderBrowserDialog.SelectedPath = profilesPathTextBox.Text; // при старте открываем папку Roaming
-            }
-            else
-            {
-                folderBrowserDialog.SelectedPath = RoamingPath; // при старте открываем папку Roaming
-            }
+            folderBrowserDialog.SelectedPath = path; // при старте открываем папку Roaming
             folderBrowserDialog.Description = "Выберите папку для сохранения файла"; // Задаем описание окна
             if (folderBrowserDialog.ShowDialog() == DialogResult.OK && !string.IsNullOrEmpty(folderBrowserDialog.SelectedPath)) // если выбрали директорию и она не ровна null
             {
                 profilesPath = folderBrowserDialog.SelectedPath; // присваеваем локальной переменной профилей значение выбранной папки
             }
 
-            profilesPathTextBox.Text = profilesPath; // устанавливаем новое значение пути к профилям в текстовое поле
+            profilesPathTextBox.Text = profilesPath; // устанавливаем в поле ввода путь к профилям
+        }
+
+        private void panel1_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                // Сохраняем текущую позицию мыши при нажатии
+                mouseOffset = new Point(-e.X, -e.Y);
+                isMouseDown = true;
+            }
+        }
+
+        private void panel1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (isMouseDown)
+            {
+                // Получаем новую позицию окна относительно начальной точки
+                Point mousePos = Control.MousePosition;
+                mousePos.Offset(mouseOffset.X, mouseOffset.Y);
+
+                // Перемещаем окно на новую позицию
+                Location = mousePos;
+            }
+        }
+
+        private void panel1_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                isMouseDown = false;
+            }
+        }
+
+        private void closeApp_Click(object sender, EventArgs e)
+        {
+            Hide();
+        }
+
+        private void minimizeApp_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
         }
     }
 }

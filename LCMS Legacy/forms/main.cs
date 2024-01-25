@@ -1,5 +1,4 @@
-﻿using LCMS_Legacy.classes;
-using LCMS_Legacy.forms;
+﻿using LCMS_Legacy.forms;
 using System.Diagnostics;
 
 namespace LCMS_Legacy
@@ -7,10 +6,11 @@ namespace LCMS_Legacy
 
     public partial class main : Form
     {
-        
+        private Point mouseOffset;
+        private bool isMouseDown = false;
 
         ConfigManager configManager = new ConfigManager("config.xml"); //создаем локальный объект конфига
-        Updater updateManager = new Updater();
+        Updater updater = new Updater();
 
         public string gamePath = ""; // задаем начальное значение для gamePath
         public string profilesPath = ""; // задаем начальное значение для profilesPath
@@ -21,22 +21,7 @@ namespace LCMS_Legacy
         public main()
         {
             InitializeComponent();
-        }
-
-        private async void CheckAndPerformUpdate()
-        {
-            if (await updateManager.CheckForUpdates())
-            {
-
-                if (await updateManager.PerformUpdate())
-                {
-                    MessageBox.Show("Updating Done!");
-                }
-                else
-                {
-                    MessageBox.Show("Updating error!");
-                }
-            }
+            
         }
 
         public void LoadConfig()
@@ -46,6 +31,9 @@ namespace LCMS_Legacy
             gamePath = config.GamePath; // загружаем директорию игры из конфига
             profilesPath = config.ProfilesFolderPath; // загружаем директорию профилей из конфига
             closeOnGameStart = config.CloseOnGameStart; // загружаем состояние флага закрытия после запуска игры
+            selectedProfile = config.LastSelectedProfile; // загружаем последний выбраный конфиг
+
+            selectedProfileText.Text = selectedProfile;
         }
 
         public void LoadProfiles(string folderPath)
@@ -130,8 +118,7 @@ namespace LCMS_Legacy
 
             LoadConfig(); // загружаем записанную конфигурацию
             LoadProfiles(profilesPath); // обновляем список профилей в profilesBox'е
-
-            //CheckAndPerformUpdate();
+            //updater.CheckForUpdates();
         }
 
         private void settings_Click(object sender, EventArgs e)
@@ -155,6 +142,11 @@ namespace LCMS_Legacy
             try
             {
                 selectedProfile = profilesBox.SelectedItems[0].ToString(); // пробуем присвоить переменной значение выбранного профиля (текст)
+                selectedProfileText.Text = selectedProfile;
+
+                Config config = configManager.LoadConfig();
+                config.LastSelectedProfile = selectedProfile;
+                configManager.SaveConfig(config);
             }
             catch (Exception ex)
             {
@@ -170,6 +162,47 @@ namespace LCMS_Legacy
         private void startVanilla_Click(object sender, EventArgs e)
         {
             StartGame("vanilla"); // запуск ванильной версии
+        }
+
+        private void closeApp_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void minimizeApp_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void panel1_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                // Сохраняем текущую позицию мыши при нажатии
+                mouseOffset = new Point(-e.X, -e.Y);
+                isMouseDown = true;
+            }
+        }
+
+        private void panel1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (isMouseDown)
+            {
+                // Получаем новую позицию окна относительно начальной точки
+                Point mousePos = Control.MousePosition;
+                mousePos.Offset(mouseOffset.X, mouseOffset.Y);
+
+                // Перемещаем окно на новую позицию
+                Location = mousePos;
+            }
+        }
+
+        private void panel1_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                isMouseDown = false;
+            }
         }
     }
 }
