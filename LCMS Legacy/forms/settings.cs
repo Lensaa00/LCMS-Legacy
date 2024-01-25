@@ -1,4 +1,6 @@
-﻿namespace LCMS_Legacy.forms
+﻿using System.Reflection;
+
+namespace LCMS_Legacy.forms
 {
     public partial class settings : Form
     {
@@ -9,6 +11,7 @@
 
         public string gamePath = ""; // задаем стандартное значение для gamePath
         public string profilesPath = ""; // задаем стандартное значение для profilesPath
+        public string appVersion = Assembly.GetEntryAssembly().GetName().Version.ToString(3);
         public bool closeOnGameStart2 = false; // задаем стандартное значение для profilesPath
 
         public settings()
@@ -34,6 +37,7 @@
             closeOnGameStart.Checked = closeOnGameStart2; // устанавливаем значение флага для checkbox'a
             gamePathTextBox.Text = gamePath; // устанавливаем путь к игре в текстовое поле
             profilesPathTextBox.Text = profilesPath; // устанавливаем путь к профилям в текс. поле
+            label4.Text = "Версия: " + appVersion;
         }
 
         private void saveSettingsButton_Click(object sender, EventArgs e)

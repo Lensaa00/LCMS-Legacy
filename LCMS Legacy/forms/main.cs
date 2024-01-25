@@ -118,7 +118,7 @@ namespace LCMS_Legacy
 
             LoadConfig(); // загружаем записанную конфигурацию
             LoadProfiles(profilesPath); // обновляем список профилей в profilesBox'е
-            //updater.CheckForUpdates();
+            updater.CheckForUpdates();
         }
 
         private void settings_Click(object sender, EventArgs e)

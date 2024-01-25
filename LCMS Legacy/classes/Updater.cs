@@ -1,11 +1,14 @@
-﻿using Octokit;
+﻿using Microsoft.VisualBasic;
+using Octokit;
 using System.Net;
 using System.Reflection;
+using System.Diagnostics;
 
 public class Updater
 {
     string gitOwner = "Lensaa00";
     string gitName = "LCMS-Legacy";
+
     public async void CheckForUpdates()
     {
         var client = new GitHubClient(new ProductHeaderValue("LCMSLegacy"));
@@ -15,22 +18,18 @@ public class Updater
 
         Version currentVersion = Assembly.GetEntryAssembly().GetName().Version;
         Version latestVersion = new Version(latest.TagName);
-        MessageBox.Show(currentVersion.ToString());
-        MessageBox.Show(latestVersion.ToString());
 
         if (latestVersion > currentVersion)
         {
-            if (MessageBox.Show("Доступно обновление!", "test", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (MessageBox.Show($"LCMS Legacy\nТекущая версия: {currentVersion.ToString(3)}\nВерсия обновления: {latestVersion}\nОбновить?", "Доступно обновление!", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 UpdateApp();
             }
         }
         else
         {
-            MessageBox.Show("You are up-to-date!!!");
+            MessageBox.Show("Обновления не найдены");
         }
-
-        MessageBox.Show($"The latest release is tagged at {latest.TagName} and is named {latest.Name}");
     }
 
     public async void UpdateApp()
@@ -42,6 +41,21 @@ public class Updater
         var assets = latest.Assets;
         var downloadAsset = assets[0];
 
-        MessageBox.Show($"{downloadAsset.Name}, {downloadAsset.Url}");
+        string exename = AppDomain.CurrentDomain.FriendlyName;
+
+        Version latestVersion = new Version(latest.TagName);
+
+        Directory.SetCurrentDirectory(AppContext.BaseDirectory);
+
+        using (var wc = new WebClient())
+        {
+            wc.DownloadFile($"https://github.com/Lensaa00/LCMS-Legacy/releases/download/{latestVersion}/LCMS.Legacy.rar", "Update.rar");
+            Cmd($"taskkill /f /im \"LCMS Legacy.exe\" && timeout /t 1 && tar -xf Update.rar && del Update.rar && \"LCMS Legacy.exe\"");
+        }
+    }
+
+    public void Cmd (string line)
+    {
+        Process.Start("cmd.exe", "/c " + line);
     }
 }
